@@ -20,9 +20,15 @@
             </div>
 
             <div class="col-md-6">
-                <form class="mb-5" method="post" id="contactForm" name="contactForm">
+                {% if messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {% for message in messages %} {{message}} {% endfor %}.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                <form class="mb-5" action="/Conntact_Us" method="POST" id="contactForm" name="contactForm">
+                    {% csrf_token %}
                     <div class="row">
-
                         <div class="col-md-12 form-group">
                             <label for="name" class="col-form-label">Name</label>
                             <input type="text" class="form-control" name="name" id="name">
@@ -48,11 +54,10 @@
                         </div>
                     </div>
                 </form>
-
-                <div id="form-message-warning mt-4"></div>
-                <div id="form-message-success">
-                    Your message was sent, thank you!
+                <!-- Warning and Success Message -->
+                <div id="form-message-warning mt-4">
                 </div>
+
             </div>
         </div>
     </div>
