@@ -13,3 +13,12 @@ class Contact_Info(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     issue_date = models.DateTimeField(auto_now_add=True)
     solving_date = models.DateTimeField(null=True)
+
+class City(models.Model):
+    name = models.CharField(max_length=70)
+
+
+class State(models.Model):
+    name = models.CharField(max_length=70)
+
+

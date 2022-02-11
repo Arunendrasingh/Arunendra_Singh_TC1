@@ -6,7 +6,8 @@ from django.contrib import messages
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    city_obj = City.objects.all()
+    return render(request, 'Address_Book.html')
 
 def Contact(request):
     if request.method  == 'POST':
@@ -21,7 +22,8 @@ def Contact(request):
         return render(request, 'Contact_Us.html')
 
 def Address_Book(request):
+    city_obj = City.objects.all()
     if request.method  == 'POST':
         return render(request, 'Address_Book.html')
     else:
-        return render(request, 'Address_Book.html')
+        return render(request, 'Address_form.html', {'city_name':city_obj})
