@@ -14,12 +14,20 @@ class Contact_Info(models.Model):
     issue_date = models.DateTimeField(auto_now_add=True)
     solving_date = models.DateTimeField(null=True)
 
+    def __str__(self) -> str:
+        return self.Name
+
 class City(models.Model):
     name = models.CharField(max_length=70)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class State(models.Model):
     name = models.CharField(max_length=70)
+    def __str__(self) -> str:
+        return self.name
 
 
 class Address_info(models.Model):
@@ -29,4 +37,6 @@ class Address_info(models.Model):
     street = models.TextField()
     zip_code = models.IntegerField()
     user_email = models.EmailField()
+    def __str__(self) -> str:
+        return self.first_name + " " + self.last_name
 

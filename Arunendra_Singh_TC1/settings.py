@@ -139,7 +139,7 @@ EMAIL_HOST_PASSWORD = "Aman@30122000"
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR/"TC1/static",
+    BASE_DIR/'TC1/static',
 ]
 
 STATIC_ROOT = BASE_DIR/'static'

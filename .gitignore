@@ -3,3 +3,5 @@ db.sqlite3
 /__pycache__/
 TC_1/__pycache__
 TC_1/migrations/__pycache__
+fonts/
+Resorces
