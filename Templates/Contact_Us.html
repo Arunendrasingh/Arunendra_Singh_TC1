@@ -20,12 +20,14 @@
             </div>
 
             <div class="col-md-6">
+                <!-- Error message start -->
                 {% if messages %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     {% for message in messages %} {{message}} {% endfor %}.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 {% endif %}
+                <!-- Error message End -->
                 <form class="mb-5" action="/Conntact_Us" method="POST" id="contactForm" name="contactForm">
                     {% csrf_token %}
                     <div class="row">

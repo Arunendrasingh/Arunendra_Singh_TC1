@@ -4,7 +4,16 @@
         <div class="col">
             <div class="card my-4 shadow-3" style="background-color: #cfcfcf;">
                 <div class="row g-0 justify-content-center align-items-center">
+
                     <div class="col-xl-6">
+                        <!-- Show the Error Message -->
+                        {% if messages %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {% for message in messages %} {{message}} {% endfor %}.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endif %}
+                        <!-- End Error Message -->
                         <form action="{% if editable == 1 %} /edit_address/{{address_obj.id}} {% else %}/Address_Book {% endif %}" method="POST" name="AddressForm">
                             {% csrf_token %}
                             <div class="card-body p-md-5 text-black">
@@ -32,7 +41,7 @@
                                 <div class="row">
                                     <div class="col-md-5 mb-4">
                                         <select name="city_name" class="select" required>
-                                        <option>City</option>
+                                        <option value="">City</option>
                                         {% for city in city_name %}
                                         <option value="{{city.name}}">{{city.name}}</option>
                                         {% endfor %}
@@ -41,7 +50,7 @@
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" name="zip_code" id="form3Example3" class="form-control inputstyle form-control-lg" value="{% if editable == 1 %} {{address_obj.zip_code}} {% endif %}" required />
+                                    <input type="number" name="zip_code" id="form3Example3" class="form-control inputstyle form-control-lg" value="{% if editable == 1 %} {{address_obj.zip_code}} {% endif %}" required />
                                     <label class="form-label" for="form3Example3">Zip</label>
                                 </div>
 

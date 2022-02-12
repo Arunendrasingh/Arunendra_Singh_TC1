@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from pyparsing import empty
 from TC_1.models import *
 import datetime
 from django.contrib import messages
@@ -29,7 +30,15 @@ def Address_Book(request):
         street_name = request.POST['street']
         city_name = request.POST['city_name']
         zip_code = request.POST['zip_code']
+        # Check The type of zip code 
+        try:
+            zip_code = int(zip_code)
+        except:
+            messages.info(request, "zipcode must be Integer")
+            return render(request, 'Address_form.html', {'city_name':city_obj})
         user_email = request.POST['user_email']
+
+        
         address_obj = Address_info(first_name = First_name, last_name = Last_name, street = street_name, zip_code = zip_code, city_name = city_name, user_email=user_email)
         address_obj.save()
 
@@ -39,13 +48,14 @@ def Address_Book(request):
     else:
         return render(request, 'Address_form.html', {'city_name':city_obj})
 
-
+# Delete Address
 def delete_address(request, id):
     p_obj = Address_info.objects.get(id = id)
     p_obj.delete()
     messages.info(request, "Address Information of " +p_obj.first_name + " " + p_obj.last_name+" is Deleted Succesfully!")
     return redirect("/")
 
+# Edit Address
 def edit_address(request, id):
     if request.method == 'POST':
         p_obj = Address_info.objects.get(id = id)
