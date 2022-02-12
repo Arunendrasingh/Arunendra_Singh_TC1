@@ -22,3 +22,11 @@ class State(models.Model):
     name = models.CharField(max_length=70)
 
 
+class Address_info(models.Model):
+    city_name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    street = models.TextField()
+    zip_code = models.IntegerField()
+    user_email = models.EmailField()
+

@@ -5,61 +5,56 @@
             <div class="card my-4 shadow-3" style="background-color: #cfcfcf;">
                 <div class="row g-0 justify-content-center align-items-center">
                     <div class="col-xl-6">
-                        <div class="card-body p-md-5 text-black">
-                            <h3 class="mb-4 text-uppercase">Adress Info</h3>
-                            <div class="row">
-                                <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
-                                        <input type="text" id="form3Example1m" class="form-control inputstyle form-control-lg" />
-                                        <label class="form-label" for="form3Example1m">First name</label>
+                        <form action="{% if editable == 1 %} /edit_address/{{address_obj.id}} {% else %}/Address_Book {% endif %}" method="POST" name="AddressForm">
+                            {% csrf_token %}
+                            <div class="card-body p-md-5 text-black">
+                                <h3 class="mb-4 text-uppercase">Adress Info</h3>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" name="first_name" id="form3Example1m" class="form-control inputstyle form-control-lg" value="{% if editable == 1 %} {{address_obj.first_name}} {% endif %}" required />
+                                            <label class="form-label" for="form3Example1m">First name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" name="last_name" id="form3Example1n" class="form-control inputstyle form-control-lg" value="{% if editable == 1 %} {{address_obj.last_name}} {% endif %}" required />
+                                            <label class="form-label" for="form3Example1n">Last name</label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
-                                        <input type="text" id="form3Example1n" class="form-control inputstyle form-control-lg" />
-                                        <label class="form-label" for="form3Example1n">Last name</label>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="street" id="form3Example8" class="form-control inputstyle form-control-lg" value="{% if editable == 1 %} {{address_obj.street}} {% endif %}" required />
+                                    <label class="form-label" for="form3Example8">Street</label>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5 mb-4">
+                                        <select name="city_name" class="select" required>
+                                        <option>City</option>
+                                        {% for city in city_name %}
+                                        <option value="{{city.name}}">{{city.name}}</option>
+                                        {% endfor %}
+                                    </select>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="form-outline mb-4">
-                                <input type="text" id="form3Example8" class="form-control inputstyle form-control-lg" />
-                                <label class="form-label" for="form3Example8">Street</label>
-                            </div>
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="zip_code" id="form3Example3" class="form-control inputstyle form-control-lg" value="{% if editable == 1 %} {{address_obj.zip_code}} {% endif %}" required />
+                                    <label class="form-label" for="form3Example3">Zip</label>
+                                </div>
 
-                            <div class="row">
-                                <!-- <div class="col-md-6 mb-4">
-                                    <select class="select">
-                                        <option value="1">State</option>
-                                        <option value="2">Option 1</option>
-                                        <option value="3">Option 2</option>
-                                        <option value="4">Option 3</option>
-                                    </select>
-                                </div> -->
-                                <div class="col-md-5 mb-4">
-                                    <select class="select">
-                                        <option value="1">City</option>
-                                        <option value="2">Option 1</option>
-                                        <option value="3">Option 2</option>
-                                        <option value="4">Option 3</option>
-                                    </select>
+                                <div class="form-outline mb-4">
+                                    <input type="email" name="user_email" id="form3Example2" class="form-control inputstyle form-control-lg" value="{% if editable == 1 %} {{address_obj.user_email}} {% endif %}" required />
+                                    <label class="form-label" for="form3Example2">Email</label>
+                                </div>
+
+                                <div class="d-flex justify-content-end pt-3">
+                                    <button type="submit" class="btn btn-success btn-lg ms-2" style="background-color: hsl(210, 100%, 50%)">Save Data</button>
                                 </div>
                             </div>
-
-                            <div class="form-outline mb-4">
-                                <input type="text" id="form3Example3" class="form-control inputstyle form-control-lg" />
-                                <label class="form-label" for="form3Example3">Zip</label>
-                            </div>
-
-                            <div class="form-outline mb-4">
-                                <input type="text" id="form3Example2" class="form-control inputstyle form-control-lg" />
-                                <label class="form-label" for="form3Example2">Email</label>
-                            </div>
-
-                            <div class="d-flex justify-content-end pt-3">
-                                <button type="button" class="btn btn-success btn-lg ms-2" style="background-color: hsl(210, 100%, 50%)">Save Data</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

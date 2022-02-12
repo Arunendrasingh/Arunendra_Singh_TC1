@@ -191,6 +191,12 @@ td {
     padding-right: 10px;
 }
 
+.column0 {
+    width: 8%;
+    padding-left: 20px;
+    text-align: center;
+}
+
 .column1 {
     width: 15%;
     padding-left: 20px;
@@ -198,12 +204,12 @@ td {
 }
 
 .column2 {
-    width: 13%;
+    width: 15%;
     text-align: center;
 }
 
 .column3 {
-    width: 22%;
+    width: 12%;
     text-align: center;
 }
 
@@ -311,4 +317,12 @@ td {
 
 .table100.ver1 .ps__rail-y .ps__thumb-y::before {
     background-color: #cccccc;
+}
+
+
+/* To display the block as level element */
+
+table.scrolldown tbody,
+table.scrolldown thead {
+    display: block;
 }

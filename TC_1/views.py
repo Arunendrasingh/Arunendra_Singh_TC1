@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from TC_1.models import *
 import datetime
 from django.contrib import messages
@@ -6,8 +6,8 @@ from django.contrib import messages
 # Create your views here.
 
 def index(request):
-    city_obj = City.objects.all()
-    return render(request, 'Address_Book.html')
+    add_obj = Address_info.objects.all()
+    return render(request, 'Address_Book.html', {'address_detail': add_obj})
 
 def Contact(request):
     if request.method  == 'POST':
@@ -24,6 +24,42 @@ def Contact(request):
 def Address_Book(request):
     city_obj = City.objects.all()
     if request.method  == 'POST':
-        return render(request, 'Address_Book.html')
+        First_name = request.POST['first_name']
+        Last_name = request.POST['last_name']
+        street_name = request.POST['street']
+        city_name = request.POST['city_name']
+        zip_code = request.POST['zip_code']
+        user_email = request.POST['user_email']
+        address_obj = Address_info(first_name = First_name, last_name = Last_name, street = street_name, zip_code = zip_code, city_name = city_name, user_email=user_email)
+        address_obj.save()
+
+        # Extract the data and show it on page
+        add_obj = Address_info.objects.all()
+        return render(request, 'Address_Book.html', {'address_detail': add_obj})
     else:
         return render(request, 'Address_form.html', {'city_name':city_obj})
+
+
+def delete_address(request, id):
+    p_obj = Address_info.objects.get(id = id)
+    p_obj.delete()
+    messages.info(request, "Address Information of " +p_obj.first_name + " " + p_obj.last_name+" is Deleted Succesfully!")
+    return redirect("/")
+
+def edit_address(request, id):
+    if request.method == 'POST':
+        p_obj = Address_info.objects.get(id = id)
+        p_obj.first_name = request.POST['first_name']
+        p_obj.last_name = request.POST['last_name']
+        p_obj.street = request.POST['street']
+        p_obj.zip_code = request.POST['zip_code']
+        p_obj.city_name = request.POST['zip_code']
+        p_obj.user_email = request.POST['user_email']
+        p_obj.save()
+        messages.info(request, "Address Information of " +p_obj.first_name + " " + p_obj.last_name+" is Edited Succesfully!")
+        return redirect("/")   
+    else:
+        city_obj = City.objects.all()
+        p_obj = Address_info.objects.get(id = id)
+        return render(request, 'Address_form.html', {'city_name':city_obj, 'address_obj': p_obj, 'editable':1})
+    
